@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<project name="Java-exercise" default="Main" basedir=".">
+ 
+  <property name="src.dir" location="src" />
+  <property name="lib.dir" location="lib" />
+  <property name="build.dir" location="bin" />
+
+  <path id="build.classpath">
+	<fileset dir="${lib.dir}" includes="**/*.jar"/>
+   </path>
+ 
+  <target name="clean">
+    <delete dir="${build.dir}" />
+  	<delete dir="${lib.dir}"/>
+  </target>
+
+  <target name="makedir">
+    <mkdir dir="${build.dir}" />
+  	<mkdir dir="${lib.dir}"/>
+  </target>
+	
+  <target name="copy_resources">
+  	<echo>Copy non-java resources</echo>
+  	 <copy todir="${lib.dir}" overwrite="true">
+  	  <fileset dir="resources"/>
+  	 </copy>
+  </target>
+
+
+  <target name="compile-src" depends="clean, makedir, copy_resources">
+  	<echo message="---- compile-src called ------"/>
+    <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath" />
+  	<copy todir="${build.dir}">
+  	   <fileset dir="${src.dir}" excludes="**/*.java"/>
+  	</copy>
+  </target>
+		
+   <target name="jar" depends="compile-src">
+		<echo message="----JAR called----"/>	
+		<jar destfile="${lib.dir}/diptin.jar" basedir="${build.dir}">
+		</jar>
+   </target>
+
+  <target name="Main" depends="jar">
+	<echo message="---- main called ------"/>
+	<description>Main target</description>
+  </target>
+
+</project> 
+
