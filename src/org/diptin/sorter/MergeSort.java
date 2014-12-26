@@ -78,74 +78,8 @@ public class MergeSort<T extends Comparable<T>> {
 		return false;
 	    }
 }
-
+//Generic type is used for following use cases
 //public class MergeSort {
-//	
-//	public void sort(int[] arr){
-//		recMergeSort(arr, 0, arr.length-1);
-//	}
-//	
-//	private void recMergeSort(int[] arr, int left, int right){
-//		if(left >= right)
-//			return;
-//		
-//		int mid = left+((right-left)/2);
-//	
-//		recMergeSort(arr, left, mid);
-//		recMergeSort(arr, mid+1, right);
-//		
-//		merge(arr, left, mid, right);
-//	}
-//	
-//	private void merge(int[] mgArr, int left, int mid, int right){
-//		
-//		int[] leftArr = new int[mid - left + 1];
-//		int[] rightArr = new int[right - mid];		
-//		
-//		for(int i = 0, j = left; i < leftArr.length && j <= mid; i++,j++)
-//			leftArr[i] = mgArr[j]; 
-//		
-//		for(int i = 0, j = mid + 1; i < rightArr.length && j <= right; i++,j++)
-//			rightArr[i] = mgArr[j];
-//		
-//		int k = left, i = 0, j = 0;
-//		
-//		while(i < leftArr.length && j < rightArr.length) {
-//			
-//			if(leftArr[i] < rightArr[j]) {
-//				mgArr[k] = leftArr[i];
-//				i++; 
-//				k++;
-//			}
-//			else{
-//				mgArr[k] = rightArr[j];
-//				j++; 
-//				k++;
-//			}
-//		}
-//		if(i == leftArr.length){
-//			while(j < rightArr.length){
-//				mgArr[k] = rightArr[j];
-//				j++;
-//				k++;
-//			}
-//		}
-//		else if(j == rightArr.length){
-//			while(i < leftArr.length){
-//				mgArr[k] = leftArr[i];
-//				i++; 
-//				k++;
-//			}
-//		}
-//	}
-//	
-//	void printArray(int[] arr){
-//		System.out.println();
-//		for(int i=0;i<arr.length;i++)
-//			System.out.print(arr[i] + ", ");
-//		System.out.println();
-//	}
-//	
 //	public static void main(String[] args) {
 //		MergeSort mrgSort = new MergeSort();
 //		int[] arrInt = {5,100, 1, -99, 78, 1};
