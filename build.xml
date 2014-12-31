@@ -1,50 +1,83 @@
 <?xml version="1.0"?>
 <project name="Java-exercise" default="Main" basedir=".">
  
-  <property name="src.dir" location="src" />
-  <property name="lib.dir" location="lib" />
-  <property name="build.dir" location="bin" />
-
-  <path id="build.classpath">
-	<fileset dir="${lib.dir}" includes="**/*.jar"/>
-   </path>
+ <target name="init">
+	<property name="src.dir" location="src" />
+	<property name="lib.dir" location="lib" />
+	<property name="build.dir" location="bin" />
+	<property name="tst.dir" location="test" />
+	<property name="report.dir"  value="junitreport"/>
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar"/>
+	</path>
+ </target>
  
-  <target name="clean">
-    <delete dir="${build.dir}" />
-  	<delete dir="${lib.dir}"/>
-  </target>
+ <target name="clean">
+	<delete dir="${build.dir}" />
+	<delete dir="${lib.dir}"/>
+	<delete dir="${report.dir}"/>
+ </target>
 
-  <target name="makedir">
-    <mkdir dir="${build.dir}" />
+ <target name="makedir">
+	<mkdir dir="${build.dir}" />
   	<mkdir dir="${lib.dir}"/>
-  </target>
+ </target>
 	
-  <target name="copy_resources">
-  	<echo>Copy non-java resources</echo>
-  	 <copy todir="${lib.dir}" overwrite="true">
-  	  <fileset dir="resources"/>
-  	 </copy>
-  </target>
+ <target name="copy_resources">
+	<echo>Copy non-java resources</echo>
+  	<copy todir="${lib.dir}" overwrite="true">
+  		<fileset dir="resources"/>
+  	</copy>
+ </target>
 
-
-  <target name="compile-src" depends="clean, makedir, copy_resources">
-  	<echo message="---- compile-src called ------"/>
-    <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath" />
+ <target name="compile-src" depends="clean, makedir, copy_resources">
+	<echo message="---- compile-src called ------"/>
+	<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath" />
   	<copy todir="${build.dir}">
   	   <fileset dir="${src.dir}" excludes="**/*.java"/>
   	</copy>
-  </target>
-		
-   <target name="jar" depends="compile-src">
-		<echo message="----JAR called----"/>	
-		<jar destfile="${lib.dir}/diptin.jar" basedir="${build.dir}">
-		</jar>
-   </target>
+ </target>
 
-  <target name="Main" depends="jar">
+ <target name="compile-tst" depends="compile-src">
+	<echo message="---- compile-tst called ------"/>
+	<javac srcdir="${tst.dir}" destdir="${build.dir}" classpathref="build.classpath" />
+	<copy todir="${build.dir}">
+  	  <fileset dir="${tst.dir}" excludes="**/*.java"/>
+  	</copy>
+ </target>
+		
+ <target name="jar" depends="compile-src, compile-tst">
+	<echo message="----JAR called----"/>	
+	<jar destfile="${lib.dir}/diptin.jar" basedir="${build.dir}">
+	</jar>
+ </target>
+
+ <target name="junit" depends="jar">
+	<mkdir dir="${report.dir}"/>
+	<junit printsummary="yes" fork="true" forkmode="once">
+		<classpath refid="build.classpath"/>
+   		<formatter type="xml"/>
+		<!--<test name="org.diptin.strings.tests.StringPermuterTest" todir="${report.dir}"/>-->
+	        <batchtest todir="${report.dir}">
+		    <fileset dir="${tst.dir}" includes="**/*TestSuite.java"/>
+		</batchtest>
+	</junit>
+ </target>
+
+ <target name="junit-report" depends="junit">
+	<echo message="junit report directory is ${report.dir}"/>
+	<junitreport todir="${report.dir}">
+		<fileset dir="${report.dir}">
+			<include name="*.xml"/>
+		</fileset>
+		<report format="frames" todir="${report.dir}"/>
+	</junitreport>
+ </target>
+
+ <target name="Main" depends="init, jar, junit-report">
 	<echo message="---- main called ------"/>
 	<description>Main target</description>
-  </target>
+ </target>
 
 </project> 
 
