@@ -33,7 +33,7 @@ public class BubbleSortTestInteger {
 				{new Integer[]{99, -99}, new Integer[]{-99, 99}},	//3. array with two elements with same face value but different signs
 				{new Integer[]{-78, -12, -45, -23, 0}, new Integer[]{-78, -45, -23, -12, 0}},	//4. all negatives
 				{new Integer[]{1000, 90, 50, 0, -1, -10}, new Integer[]{-10, -1, 0, 50, 90, 1000}}, //5. all elements in descending order
-				{new Integer[]{-55, -1, 0, 1, 10, 100000}, new Integer[]{-55, -5, 0, 1, 10, 100000}}	//6. already sorted array
+				{new Integer[]{-55, -1, 0, 1, 10, 100000}, new Integer[]{-55, -1, 0, 1, 10, 100000}}	//6. already sorted array
 		});
 	}
 	
