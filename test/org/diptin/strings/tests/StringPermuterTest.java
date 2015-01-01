@@ -57,7 +57,7 @@ public class StringPermuterTest {
 		assertEquals(expectedList, actualList);
 	}
 	
-	@Test
+	@Test // Test fails. To check Junit test report for failures
 	public void testPermuteForNonCharString() {
 		expectedList = null;
 		strPermuter.permutate("/,'j5");

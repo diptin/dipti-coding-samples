@@ -34,7 +34,7 @@ public class StringSegregatorTest {
 	public static Collection<Object[]> testData() {
 		return Arrays.asList(new Object[][] {
 				{"a b c", "abc"}, 
-				{"", "a"}, 
+				{"", "a"},	// Test fails. Added to check Junit Report for failures 
 				{"    ", ""}, 
 				{null, null}, 
 				{"abcd", "abcd"}, 
