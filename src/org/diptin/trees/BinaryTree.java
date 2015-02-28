@@ -43,10 +43,10 @@ public class BinaryTree<E> {
 		int heightOfRightSubTree = 0;
 		
 		if (root.hasLeftChild()) 
-			heightOfLeftSubTree = getHeightOfTree(root.leftChild); 
+			heightOfLeftSubTree = getHeightOfTree(root.getLeftChild()); 
 			
 		if (root.hasRightChild())
-			heightOfRightSubTree = getHeightOfTree(root.rightChild);
+			heightOfRightSubTree = getHeightOfTree(root.getRightChild());
 		
 		int height = 1 + Math.max(heightOfLeftSubTree, heightOfRightSubTree);
 		return height;
@@ -97,60 +97,4 @@ public class BinaryTree<E> {
 	}
 }
 
-class TreeNode<E> {
-	E element;
-	TreeNode<E> leftChild;
-	TreeNode<E> rightChild;
-	
-	public TreeNode() {
-		element = null;
-		leftChild = null;
-		rightChild = null;
-	}
-	
-	public TreeNode(E element) {
-		this.element = element;
-		leftChild = null;
-		rightChild = null;
-	}
-	
-	public E getElement() {
-		return element;
-	}
-	
-	public void element(E value) {
-		this.element = value;
-	} 
-	
-	public TreeNode<E> getLeftChild() {
-		return leftChild;
-	}
-	
-	public TreeNode<E> getRightChild() {
-		return rightChild;
-	}
-	
-	public void leftChild(TreeNode<E> left) {
-		leftChild = left;
-	}
-	
-	public void rightChild(TreeNode<E> right) {
-		rightChild = right;
-	}
-	
-	public boolean hasLeftChild()
-	{
-		if (leftChild == null)
-			return false;
-		else
-			return true;
-	}
-	
-	public boolean hasRightChild()
-	{
-		if (rightChild == null)
-			return false;
-		else
-			return true;
-	}
-}
+
