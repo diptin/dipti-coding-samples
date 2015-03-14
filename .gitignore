@@ -1,0 +1,11 @@
+# Build and Release Folders
+bin/
+lib/
+
+# Reports
+junitreport
+
+# Ignore Eclipse Files
+.classpath
+.project
+.metadata
